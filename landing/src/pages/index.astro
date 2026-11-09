@@ -1,0 +1,293 @@
+---
+import '@fontsource-variable/archivo/wdth.css';
+import '../styles/global.css';
+
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const repo = 'https://github.com/eiyuumiru/Mirra';
+const dmg = `${repo}/releases/latest`;
+
+// Hard extruded depth for the display type, built as a stack of 1px steps.
+const extrude = Array.from({ length: 24 }, (_, i) => `calc(${i + 1} * var(--sx, 0.0042em)) calc(${i + 1} * var(--sy, 0.0042em)) 0 #0f2a47`).join(',');
+
+const steps = [
+  { id: 'mac', label: 'Your Mac', text: 'Mirra runs on your Intel Hackintosh and keeps the bridge connection alive in the background.' },
+  { id: 'bridge', label: 'Bridge iPhone', text: 'A separate jailbroken iPhone returns the cryptographic operations Apple’s app asks for, over SSH on Wi-Fi or USB.' },
+  { id: 'app', label: 'iPhone Mirroring', text: 'Apple’s own iPhone Mirroring app provides the screen, keyboard, pointer and authentication.' },
+  { id: 'phone', label: 'Your iPhone', text: 'The iPhone you mirror needs no jailbreak. Keep it locked and nearby with Wi-Fi and Bluetooth on.' },
+];
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Mirra: iPhone Mirroring on Hackintosh</title>
+    <meta
+      name="description"
+      content="Mirra is an experimental, independent macOS companion that prepares a separate jailbroken iPhone as a bridge so Apple's iPhone Mirroring can run on an Intel Hackintosh."
+    />
+    <meta name="theme-color" content="#1e40af" />
+    <link rel="icon" type="image/png" href={`${base}/img/icon.png`} />
+  </head>
+  <body style={`--extrude: ${extrude}`}>
+    <div class="cursor" aria-hidden="true" data-cursor></div>
+    <div class="cursor__dot" aria-hidden="true" data-cursor-dot></div>
+    <a class="skip" href="#main">Skip to main content</a>
+    <div class="page">
+      <p class="notice">Experimental. Independent community project, not affiliated with Apple.</p>
+      <header class="nav">
+        <a class="brand" href={`${base}/`} aria-label="Mirra home">
+          <span class="brand__name"><img src={`${base}/img/icon.png`} alt="" width="26" height="26" />MIRRA</span>
+          <span class="tag">Experimental</span>
+        </a>
+        <nav class="links" aria-label="Project">
+          <a class="pill" href={`${repo}/tree/main/docs`}>Docs</a>
+          <a class="pill" href={`${repo}#compatibility`}>Compatibility</a>
+          <a class="pill" href={repo}>Source</a>
+        </nav>
+        <a class="pill pill--solid" href="https://ko-fi.com/eiyuumiru"><span class="hide-sm">Support on </span>Ko-fi</a>
+      </header>
+
+      <main class="hero" id="main">
+        <div class="stage">
+          <div class="type">
+            <h1 class="display" aria-label="Your iPhone. On your Hackintosh.">
+              <span class="display__line display__line--a" aria-hidden="true"><span class="display__inner" data-line>Your iPhone.</span></span>
+              <span class="display__line display__line--b" aria-hidden="true"><span class="display__inner" data-line>On your</span></span>
+              <span class="display__line display__line--c" aria-hidden="true"><span class="display__inner" data-line>Hackintosh.</span></span>
+            </h1>
+
+            <div class="float float--mac" data-float>
+              <button class="card card--mac" type="button" aria-pressed="false" data-card="mac">
+                <span class="card__disc"><img src={`${base}/img/icon.png`} alt="" width="96" height="96" /></span>
+                <span>
+                  <p class="card__title">Your Mac</p>
+                  <p class="card__sub">Intel Hackintosh<br />macOS 26.7.2</p>
+                  <p class="card__hint">Tap to see its role</p>
+                </span>
+              </button>
+            </div>
+
+            <div class="float float--bridge" data-float>
+              <button class="card card--bridge" type="button" aria-pressed="false" data-card="bridge">
+                <span class="card__disc">
+                  <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="7" y="2.5" width="10" height="19" rx="2.5"></rect><path d="M10.5 5.2h3M11 19h2"></path></svg>
+                </span>
+                <span>
+                  <p class="card__title">Bridge iPhone</p>
+                  <p class="card__sub">Jailbroken<br />OpenSSH + ldid</p>
+                  <p class="card__hint">Tap to see its role</p>
+                </span>
+              </button>
+            </div>
+
+            <svg class="arrow arrow--route" viewBox="0 0 100 100" aria-hidden="true" data-arrow>
+              <path d="M8,88 C 6,52 22,30 40,44 C 52,54 46,72 62,66 C 74,61 84,66 94,72"></path>
+              <path d="M80,58 L94,72 L82,86"></path>
+            </svg>
+            <a class="badge" href={dmg} aria-label="Get the latest Mirra DMG from GitHub Releases" data-badge>
+              <svg class="badge__ring" viewBox="0 0 100 100" aria-hidden="true">
+                <path id="ring" d="M 50,50 m -37,0 a 37,37 0 1,1 74,0 a 37,37 0 1,1 -74,0" fill="none"></path>
+                <text><textPath href="#ring" textLength="228" lengthAdjust="spacing">Get the latest DMG • Free • MIT • </textPath></text>
+              </svg>
+              <svg class="badge__icon" viewBox="0 0 100 100" aria-hidden="true">
+                <path d="M50,15 V70"></path>
+                <path d="M28,50 L50,72 L72,50"></path>
+                <path d="M22,86 H78"></path>
+              </svg>
+            </a>
+          </div>
+
+          <p class="lede">
+            Mirra lets Apple&rsquo;s iPhone Mirroring run on a Hackintosh. A separate jailbroken iPhone is the bridge, and the
+            iPhone you mirror stays stock.
+          </p>
+
+          <div class="route" data-route>
+            <div class="route__tabs" role="tablist" aria-label="How Mirra connects">
+              {steps.map((s, i) => (
+                <button class="route__tab" role="tab" type="button" id={`tab-${s.id}`} aria-controls="route-panel" aria-selected={i === 0 ? 'true' : 'false'} tabindex={i === 0 ? 0 : -1} data-step={s.id}>
+                  {s.label}
+                </button>
+              ))}
+            </div>
+            <p class="route__panel" id="route-panel" role="tabpanel" aria-labelledby="tab-mac" aria-live="polite" data-panel>{steps[0].text}</p>
+          </div>
+        </div>
+      </main>
+
+      <section class="sheet" id="overview" aria-labelledby="overview-title">
+        <h2 id="overview-title" class="visually-hidden" style="position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%)">Overview</h2>
+        <div class="sheet__grid">
+          <figure class="shot">
+            <img src={`${base}/img/app-dark.png`} alt="Mirra's home window on macOS with a Connect button that opens Apple's iPhone Mirroring" width="600" height="570" loading="lazy" />
+            <figcaption>Mirra&rsquo;s home window. Connect checks the bridge, then opens Apple&rsquo;s iPhone Mirroring.</figcaption>
+          </figure>
+          <div class="reqs">
+            <h2>Before you install</h2>
+            <dl>
+              <div><dt>Host</dt><dd>Intel x86_64, macOS 26.7.2 (25G332)</dd></div>
+              <div><dt>Apple app</dt><dd>iPhone Mirroring 1.6 (98.5)</dd></div>
+              <div><dt>Bridge</dt><dd>Jailbroken iPhone with OpenSSH and ldid</dd></div>
+              <div><dt>Network</dt><dd>Working AWDL Wi-Fi</dd></div>
+              <div><dt>Video</dt><dd>Working H.264 VideoToolbox decoding</dd></div>
+            </dl>
+            <p>The iPhone you mirror needs no jailbreak. Unsupported host builds are rejected by the compatibility check.</p>
+          </div>
+        </div>
+        <div class="fineprint">
+          <p>
+            <strong>Experimental.</strong> Independent community project, not affiliated with Apple. It may not work on your
+            devices even when the requirements are met.
+          </p>
+          <a href={`${repo}#compatibility`}>Check compatibility before you install</a>
+        </div>
+      </section>
+    </div>
+
+    <script>
+      import { gsap } from 'gsap';
+      import Lenis from 'lenis';
+
+      const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+      const panel = document.querySelector<HTMLElement>('[data-panel]')!;
+      const tabs = [...document.querySelectorAll<HTMLButtonElement>('[data-step]')];
+      const cards = [...document.querySelectorAll<HTMLButtonElement>('[data-card]')];
+      const copy: Record<string, string> = JSON.parse(
+        document.getElementById('route-copy')!.textContent || '{}'
+      );
+
+      function select(id: string) {
+        tabs.forEach((t) => t.tabIndex = t.dataset.step === id ? 0 : -1);
+        tabs.forEach((t) => t.setAttribute('aria-selected', String(t.dataset.step === id)));
+        cards.forEach((c) => c.setAttribute('aria-pressed', String(c.dataset.card === id)));
+        panel.setAttribute('aria-labelledby', 'tab-' + id);
+        const r = panel.getBoundingClientRect();
+        if (r.bottom > innerHeight || r.top < 0) panel.scrollIntoView({ block: 'center', behavior: reduce ? 'auto' : 'smooth' });
+        if (reduce) {
+          panel.textContent = copy[id];
+          return;
+        }
+        gsap.to(panel, {
+          opacity: 0, y: 6, duration: 0.12, ease: 'power2.in', overwrite: true,
+          onComplete: () => {
+            panel.textContent = copy[id];
+            gsap.to(panel, { opacity: 1, y: 0, duration: 0.45, ease: 'expo.out' });
+          },
+        });
+      }
+
+      tabs.forEach((t) => t.addEventListener('click', () => select(t.dataset.step!)));
+      cards.forEach((c) => c.addEventListener('click', () => select(c.dataset.card!)));
+      tabs.forEach((t, i) =>
+        t.addEventListener('keydown', (e) => {
+          if (e.key !== 'ArrowRight' && e.key !== 'ArrowLeft') return;
+          const next = tabs[(i + (e.key === 'ArrowRight' ? 1 : -1) + tabs.length) % tabs.length];
+          next.focus();
+          select(next.dataset.step!);
+        })
+      );
+
+      if (!reduce) {
+        const lenis = new Lenis();
+        gsap.ticker.add((t) => lenis.raf(t * 1000));
+        gsap.ticker.lagSmoothing(0);
+
+        const tl = gsap.timeline({ defaults: { ease: 'expo.out' } });
+        tl.from('[data-line]', { yPercent: 40, opacity: 0, duration: 1.1, stagger: 0.12 })
+          .from('.card', { scale: 0.6, opacity: 0, duration: 0.9, stagger: 0.1, clearProps: 'transform,opacity' }, 0.35)
+          .from('[data-arrow] path', { opacity: 0, duration: 0.5, stagger: 0.05 }, 0.7)
+          .from('[data-badge]', { scale: 0.4, opacity: 0, rotate: -40, duration: 1, clearProps: 'transform,opacity' }, 0.55)
+          .from('.lede, [data-route]', { y: 16, opacity: 0, duration: 0.8, stagger: 0.08 }, 0.6);
+
+        gsap.to('[data-float]', {
+          y: (i) => (i ? 14 : -14), duration: 3.2, ease: 'sine.inOut', yoyo: true, repeat: -1, stagger: 0.6,
+        });
+      }
+
+      // Pointer system: one ticker loop lerps the cursor ring, depth parallax, magnetic pull and the extrude light.
+      const fine = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+      if (!reduce && fine) {
+        const ring = document.querySelector<HTMLElement>('[data-cursor]')!;
+        const dot = document.querySelector<HTMLElement>('[data-cursor-dot]')!;
+        const body = document.body;
+        const mouse = { x: innerWidth / 2, y: innerHeight / 2 };
+        const ringPos = { x: mouse.x, y: mouse.y };
+        let ringScale = 1;
+        let pressed = false;
+        let seen = false;
+        let magnet: HTMLElement | null = null;
+
+        const lines = [...document.querySelectorAll<HTMLElement>('.display__inner')].map((el, i) => ({ el, d: [-5, 9, 16][i] ?? 8 }));
+        const cards = [...document.querySelectorAll<HTMLElement>('.card')].map((el, i) => ({ el, d: [-14, 12][i] ?? 10 }));
+        const pull = [...document.querySelectorAll<HTMLElement>('.badge, .pill, .route__tab')];
+        const pos = new Map<HTMLElement, { x: number; y: number }>();
+        const shade = { x: 0.0042, y: 0.0042 };
+        const interactive = 'a, button, [role="tab"]';
+
+        addEventListener('pointermove', (e) => {
+          mouse.x = e.clientX; mouse.y = e.clientY;
+          if (!seen) { seen = true; ringPos.x = mouse.x; ringPos.y = mouse.y; ring.classList.add('is-on'); dot.classList.add('is-on'); }
+          const t = e.target as Element;
+          const link = t.closest(interactive) as HTMLElement | null;
+          const onSheet = !!t.closest('.sheet');
+          ring.classList.toggle('is-link', !!link);
+          ring.classList.toggle('is-sheet', onSheet);
+          dot.classList.toggle('is-sheet', onSheet);
+          ring.textContent = t.closest('[data-badge]') ? 'Get' : '';
+          magnet = link && link.matches('.badge, .pill, .route__tab') ? link : null;
+        });
+        document.documentElement.addEventListener('pointerleave', () => { seen = false; ring.classList.remove('is-on'); dot.classList.remove('is-on'); });
+        addEventListener('pointerdown', () => { pressed = true; });
+        addEventListener('pointerup', () => { pressed = false; });
+
+        const lerp = (a: number, b: number, k: number) => a + (b - a) * k;
+        gsap.ticker.add(() => {
+          ringPos.x = lerp(ringPos.x, mouse.x, 0.16);
+          ringPos.y = lerp(ringPos.y, mouse.y, 0.16);
+          const target = pressed ? 0.7 : ring.classList.contains('is-link') ? (ring.textContent ? 2.2 : 1.6) : 1;
+          ringScale = lerp(ringScale, target, 0.2);
+          ring.style.transform = `translate(${ringPos.x}px, ${ringPos.y}px) scale(${ringScale.toFixed(3)})`;
+          dot.style.transform = `translate(${mouse.x}px, ${mouse.y}px)`;
+
+          const nx = (mouse.x / innerWidth) * 2 - 1;
+          const ny = (mouse.y / innerHeight) * 2 - 1;
+
+          [...lines, ...cards].forEach(({ el, d }) => {
+            const s = pos.get(el) ?? { x: 0, y: 0 };
+            s.x = lerp(s.x, nx * d, 0.07);
+            s.y = lerp(s.y, ny * d * 0.6, 0.07);
+            pos.set(el, s);
+            el.style.setProperty('--tx', s.x.toFixed(2) + 'px');
+            el.style.setProperty('--ty', s.y.toFixed(2) + 'px');
+          });
+
+          // magnetic pull: the hovered control leans toward the pointer, the others settle back
+          pull.forEach((el) => {
+            const m = pos.get(el) ?? { x: 0, y: 0 };
+            let tx = 0, ty = 0;
+            if (el === magnet) {
+              const r = el.getBoundingClientRect();
+              tx = (mouse.x - (r.left + r.width / 2)) * 0.28;
+              ty = (mouse.y - (r.top + r.height / 2)) * 0.28;
+            }
+            m.x = lerp(m.x, tx, 0.18);
+            m.y = lerp(m.y, ty, 0.18);
+            pos.set(el, m);
+            el.style.setProperty('--tx', m.x.toFixed(2) + 'px');
+            el.style.setProperty('--ty', m.y.toFixed(2) + 'px');
+          });
+
+          // the extrude's light follows the pointer: depth falls away from it
+          shade.x = lerp(shade.x, 0.0042 - nx * 0.003, 0.08);
+          shade.y = lerp(shade.y, 0.0042 - ny * 0.0024, 0.08);
+          body.style.setProperty('--sx', shade.x.toFixed(5) + 'em');
+          body.style.setProperty('--sy', shade.y.toFixed(5) + 'em');
+        });
+      }
+    </script>
+    <script type="application/json" id="route-copy" set:html={JSON.stringify(Object.fromEntries(steps.map((s) => [s.id, s.text])))} />
+  </body>
+</html>

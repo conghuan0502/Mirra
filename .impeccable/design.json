@@ -1,0 +1,155 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-11-09T12:00:00Z",
+  "title": "Design System: Mirra",
+  "extensions": {
+    "colorMeta": {
+      "blue": { "role": "primary", "displayName": "Primary Blue", "canonical": "#1e40af", "tonalRamp": ["#060d29", "#0d1b5c", "#14298a", "#1e40af", "#4a66cc", "#8097e0", "#b8c4f0", "#e8ecfa"] },
+      "acid-lime": { "role": "primary", "displayName": "Acid Lime", "canonical": "#eff35f", "tonalRamp": ["#2e300a", "#5c6014", "#8f951f", "#c5cb3f", "#eff35f", "#f4f78f", "#f9fbbf", "#fdfdea"] },
+      "blue-deep": { "role": "secondary", "displayName": "Deep Navy", "canonical": "#0f2a47", "tonalRamp": ["#030a12", "#071426", "#0f2a47", "#1f4573", "#3a679b", "#6c93bf", "#a8c1dc", "#e1eaf3"] },
+      "periwinkle": { "role": "tertiary", "displayName": "Periwinkle", "canonical": "#abbaff", "tonalRamp": ["#1b2159", "#2c3a94", "#4a5fd1", "#7c91f5", "#abbaff", "#c4cfff", "#dde3ff", "#f1f3ff"] },
+      "ice": { "role": "tertiary", "displayName": "Ice", "canonical": "#c3efff", "tonalRamp": ["#0b3342", "#17607a", "#2f94b8", "#6cc6e6", "#c3efff", "#d5f4ff", "#e6f9ff", "#f4fcff"] },
+      "white": { "role": "neutral", "displayName": "Paper White", "canonical": "#ffffff", "tonalRamp": ["#5c5f66", "#85888f", "#aeb0b6", "#cfd1d5", "#e3e4e7", "#f0f1f3", "#f9fafb", "#ffffff"] },
+      "sheet": { "role": "neutral", "displayName": "Sheet Mist", "canonical": "#f9fafb", "tonalRamp": ["#565a60", "#80848a", "#a9acb1", "#cbcdd1", "#e0e2e5", "#eeeff1", "#f9fafb", "#fdfdfe"] },
+      "ink": { "role": "neutral", "displayName": "Ink", "canonical": "#1a1a1a", "tonalRamp": ["#050505", "#1a1a1a", "#2e2e2e", "#4a4a4a", "#717171", "#9a9a9a", "#c7c7c7", "#ececec"] }
+    },
+    "typographyMeta": {
+      "display": { "displayName": "Display", "purpose": "Three-line extruded hero tagline, uppercase, expanded width; lime, white, ice." },
+      "headline": { "displayName": "Headline", "purpose": "Sheet section heading and wordmark." },
+      "title": { "displayName": "Title", "purpose": "Device card titles and requirement terms." },
+      "body": { "displayName": "Body", "purpose": "Ice lede, route panel and sheet copy at normal width." },
+      "label": { "displayName": "Label", "purpose": "Pills, tabs, status tag, hints." }
+    },
+    "shadows": [
+      { "name": "extrude", "value": "24 layers of calc(n * var(--sx, 0.0042em)) calc(n * var(--sy, 0.0042em)) 0 #0f2a47", "purpose": "Hard extruded depth on display type only; direction follows the pointer via --sx/--sy." },
+      { "name": "card-lift", "value": "0 24px 40px -12px rgb(15 42 71 / .55), 0 6px 10px rgb(15 42 71 / .25)", "purpose": "Frosted device cards." },
+      { "name": "badge-lift", "value": "0 20px 30px -10px rgb(15 42 71 / .6), 0 4px 8px rgb(15 42 71 / .25)", "purpose": "Primary action badge." },
+      { "name": "sheet-rise", "value": "0 -20px 50px rgb(15 42 71 / .25)", "purpose": "Upward shadow of the sheet." }
+    ],
+    "motion": [
+      { "name": "ease", "value": "cubic-bezier(0.16, 1, 0.3, 1)", "purpose": "Expo-out for hover, selection, and card straightening." },
+      { "name": "badge-spin", "value": "12s linear infinite", "purpose": "Rotating text ring on the action badge; disabled under reduced motion." },
+      { "name": "float-bob", "value": "3.2s sine.inOut yoyo, 14px", "purpose": "Idle bob of device cards (GSAP); disabled under reduced motion." },
+      { "name": "cursor-follow", "value": "lerp 0.16 ring, 0.2 scale; ring 1x, 1.6x link, 2.2x badge, 0.7x press", "purpose": "Trailing lime cursor ring and dot via one GSAP ticker; fine pointers only." },
+      { "name": "parallax", "value": "lerp 0.07; lines -5/9/16px, cards -14/12px, y at 0.6x", "purpose": "Depth shift of headline lines and cards via the translate property (--tx, --ty)." },
+      { "name": "magnetic-pull", "value": "lerp 0.18, 0.28 of pointer offset", "purpose": "Badge, pills and route tabs lean toward the pointer while hovered." },
+      { "name": "extrude-light", "value": "lerp 0.08; x 0.0042em - nx*0.003, y 0.0042em - ny*0.0024", "purpose": "Extrude direction follows the pointer; off on touch and reduced motion." }
+    ],
+    "breakpoints": [
+      { "name": "desktop", "value": "48rem" }
+    ]
+  },
+  "components": [
+    {
+      "name": "Outline Pill",
+      "kind": "nav",
+      "refersTo": "pill-outline",
+      "description": "Nav link pill on the blue ground.",
+      "html": "<a class=\"ds-pill\" href=\"#\">Docs</a>",
+      "css": ".ds-pill{display:inline-block;text-decoration:none;padding:.45rem 1rem;border-radius:99px;border:1px solid rgb(255 255 255 / .45);color:#fff;font:600 .8rem 'Archivo Variable',system-ui,sans-serif;transition:background .25s cubic-bezier(.16,1,.3,1),color .25s cubic-bezier(.16,1,.3,1)}.ds-pill:hover{background:rgb(255 255 255 / .14);border-color:#fff}.ds-pill:focus-visible{outline:3px solid #eff35f;outline-offset:3px}"
+    },
+    {
+      "name": "Solid Pill",
+      "kind": "button",
+      "refersTo": "pill-solid-hover",
+      "description": "Secondary call (Ko-fi); inverts to white on hover.",
+      "html": "<a class=\"ds-pill-solid\" href=\"#\">Support on Ko-fi</a>",
+      "css": ".ds-pill-solid{display:inline-block;text-decoration:none;padding:.55rem 1.3rem;border-radius:99px;border:1px solid #fff;color:#fff;font:600 .85rem 'Archivo Variable',system-ui,sans-serif;transition:background .25s cubic-bezier(.16,1,.3,1),color .25s cubic-bezier(.16,1,.3,1)}.ds-pill-solid:hover{background:#fff;color:#1e40af}.ds-pill-solid:focus-visible{outline:3px solid #eff35f;outline-offset:3px}"
+    },
+    {
+      "name": "Status Tag",
+      "kind": "chip",
+      "refersTo": "tag-status",
+      "description": "Lime Experimental status pill.",
+      "html": "<span class=\"ds-tag\">Experimental</span>",
+      "css": ".ds-tag{display:inline-block;background:#eff35f;color:#1a1a1a;font:800 .72rem 'Archivo Variable',system-ui,sans-serif;letter-spacing:.06em;text-transform:uppercase;padding:.45rem .8rem;border-radius:99px;border:1.5px solid #fff}"
+    },
+    {
+      "name": "Notice Bar",
+      "kind": "custom",
+      "refersTo": "notice-bar",
+      "description": "Ink strip above the nav carrying the experimental, non-affiliation statement.",
+      "html": "<p class=\"ds-notice\">Experimental. Independent community project, not affiliated with Apple.</p>",
+      "css": ".ds-notice{margin:0;padding:.55rem 1rem;background:#1a1a1a;color:#fff;text-align:center;font:600 .78rem/1.35 'Archivo Variable',system-ui,sans-serif}"
+    },
+    {
+      "name": "Device Card",
+      "kind": "card",
+      "refersTo": "device-card",
+      "description": "Tilted frosted card; straightens on hover and turns lime when selected.",
+      "html": "<button class=\"ds-card\" type=\"button\"><span class=\"ds-card-disc\"></span><span><p class=\"ds-card-title\">Bridge iPhone</p><p class=\"ds-card-sub\">Jailbroken</p></span></button>",
+      "css": ".ds-card{display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:.55rem;width:9.5rem;aspect-ratio:3/3.6;padding:1rem;background:rgb(15 42 71 / .5);color:#fff;backdrop-filter:blur(14px);border:1px solid rgb(195 239 255 / .5);border-radius:1.75rem;box-shadow:0 24px 40px -12px rgb(15 42 71 / .55),0 6px 10px rgb(15 42 71 / .25);transform:rotate(10deg);transition:transform .6s cubic-bezier(.16,1,.3,1),background .3s;cursor:pointer;font-family:'Archivo Variable',system-ui,sans-serif}.ds-card:hover,.ds-card:focus-visible{transform:rotate(0) scale(1.04)}.ds-card:focus-visible{outline:3px solid #eff35f;outline-offset:3px}.ds-card[aria-pressed='true']{background:#eff35f;color:#1a1a1a;border-color:#1a1a1a}.ds-card-disc{width:5.6rem;height:5.6rem;border-radius:50%;background:rgb(255 255 255 / .35);border:3px solid rgb(255 255 255 / .6)}.ds-card-title{margin:0;font-weight:800;font-size:1.1rem;line-height:1.1}.ds-card-sub{margin:0;font-size:.8rem;font-weight:500}"
+    },
+    {
+      "name": "Action Badge",
+      "kind": "custom",
+      "refersTo": "badge-action",
+      "description": "The one primary action: lime disc with download glyph.",
+      "html": "<a class=\"ds-badge\" href=\"#\" aria-label=\"Get the latest DMG\"><svg viewBox=\"0 0 100 100\" width=\"38\" height=\"38\" fill=\"none\" stroke=\"#1a1a1a\" stroke-width=\"8\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M50,15 V70\"/><path d=\"M28,50 L50,72 L72,50\"/><path d=\"M22,86 H78\"/></svg></a>",
+      "css": ".ds-badge{display:grid;place-items:center;width:9rem;height:9rem;border-radius:50%;background:#eff35f;color:#1a1a1a;border:3px solid rgb(26 26 26 / .08);box-shadow:0 20px 30px -10px rgb(15 42 71 / .6),0 4px 8px rgb(15 42 71 / .25);transform:rotate(10deg);transition:transform .5s cubic-bezier(.16,1,.3,1);text-decoration:none}.ds-badge:hover,.ds-badge:focus-visible{transform:rotate(10deg) scale(1.07)}.ds-badge:focus-visible{outline:3px solid #eff35f;outline-offset:3px}"
+    },
+    {
+      "name": "Route Tab",
+      "kind": "chip",
+      "refersTo": "route-tab-selected",
+      "description": "Outline tab pill; selected state is lime with ink text.",
+      "html": "<button class=\"ds-tab\" type=\"button\">Your Mac</button> <button class=\"ds-tab\" type=\"button\" aria-selected=\"true\">Bridge iPhone</button>",
+      "css": ".ds-tab{padding:.5rem 1rem;border-radius:99px;cursor:pointer;border:1px solid rgb(255 255 255 / .55);background:transparent;color:#fff;font:700 .85rem 'Archivo Variable',system-ui,sans-serif;transition:background .25s cubic-bezier(.16,1,.3,1),color .25s}.ds-tab:hover{background:rgb(255 255 255 / .16)}.ds-tab[aria-selected='true']{background:#eff35f;color:#1a1a1a;border-color:#eff35f}.ds-tab:focus-visible{outline:3px solid #eff35f;outline-offset:3px}"
+    },
+    {
+      "name": "Cursor Ring",
+      "kind": "custom",
+      "refersTo": "cursor",
+      "description": "Trailing lime ring (blue on the sheet) that grows over links and shows GET over the badge; fine pointers only.",
+      "html": "<span class=\"ds-cursor\">GET</span>",
+      "css": ".ds-cursor{display:grid;place-items:center;width:2.6rem;height:2.6rem;border-radius:50%;border:2px solid #eff35f;background:rgb(239 243 95 / .92);color:#1a1a1a;font:900 .5rem 'Archivo Variable',system-ui,sans-serif;letter-spacing:.06em;text-transform:uppercase;transform:scale(1.4)}"
+    },
+    {
+      "name": "Display Headline",
+      "kind": "custom",
+      "refersTo": "display",
+      "description": "Extruded expanded uppercase display line (white tier shown).",
+      "html": "<h1 class=\"ds-display\">On your</h1>",
+      "css": ".ds-display{margin:0;color:#fff;font:900 4.5rem/.86 'Archivo Variable',system-ui,sans-serif;font-stretch:118%;letter-spacing:-.03em;text-transform:uppercase;text-shadow:.0042em .0042em 0 #0f2a47,.0084em .0084em 0 #0f2a47,.0126em .0126em 0 #0f2a47,.0168em .0168em 0 #0f2a47,.021em .021em 0 #0f2a47,.0252em .0252em 0 #0f2a47,.0294em .0294em 0 #0f2a47,.0336em .0336em 0 #0f2a47,.0378em .0378em 0 #0f2a47,.042em .042em 0 #0f2a47,.0462em .0462em 0 #0f2a47,.0504em .0504em 0 #0f2a47,.0546em .0546em 0 #0f2a47,.0588em .0588em 0 #0f2a47,.063em .063em 0 #0f2a47,.0672em .0672em 0 #0f2a47,.0714em .0714em 0 #0f2a47,.0756em .0756em 0 #0f2a47,.0798em .0798em 0 #0f2a47,.084em .084em 0 #0f2a47,.0882em .0882em 0 #0f2a47,.0924em .0924em 0 #0f2a47,.0966em .0966em 0 #0f2a47,.1008em .1008em 0 #0f2a47}"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Sticker Sheet",
+    "overview": "Mirra's landing is a loud blue field covered in things stuck onto it: tilted frosted device cards, a hand-drawn lime route arrow, a spinning circular badge, and display type that looks cut out and extruded. A near-white rounded sheet rises from the bottom edge like a second layer of paper. It is a user-pinned reference direction (blue, lime, white, extruded display type), built in code and adapted for Mirra's story: two devices, one bridge, an experimental tool.\n\nThe system is flat color with hard, saturated contrast. Primary blue is the ground, acid lime marks the one action and every selected state, white and pale ice carry the type tiers, ink sits on lime and white. Depth comes from the hard extruded display type and soft drop shadows under physically \"stuck-on\" objects. Motion is expressive on entry (expo-out) and quiet at rest; on a fine pointer the page also answers the hand: the objects lean, the controls pull toward the cursor, and the extrude's light follows it.",
+    "keyCharacteristics": [
+      "Blue ground with a faint 4rem periwinkle line grid (16% opacity).",
+      "Lime is scarce and meaningful: action, selection, status, focus, pointer.",
+      "Extra-bold, expanded Archivo in uppercase for display; normal-width Archivo for everything else.",
+      "Everything interactive is a pill or a disc; nothing is a sharp rectangle.",
+      "Tilted objects straighten on hover, focus, or selection.",
+      "A pointer layer (trailing ring, parallax, magnetic pull, light-following extrude) that exists only on fine pointers without reduced-motion."
+    ],
+    "rules": [
+      { "name": "The One Action Rule", "body": "Lime marks the single primary action (the circular badge) plus selected/active states, the experimental status, and pointer feedback. Lime never decorates; if it is not an action, a selection, a status, or the cursor, it is not lime.", "section": "colors" },
+      { "name": "The Ink-On-Lime Rule", "body": "Text on lime is always ink, never white. Text on blue is white or ice, never lime except display line one and arrows.", "section": "colors" },
+      { "name": "The Ice Tier Rule", "body": "Ice (#c3efff) is the quiet cool tier on blue: the last display line and the lede. It is not used on the sheet, on controls, or as a fill.", "section": "colors" },
+      { "name": "The Two Widths Rule", "body": "Expanded width is reserved for uppercase black-weight display and headings. Running text stays at normal width.", "section": "typography" },
+      { "name": "The Display-Only Extrude Rule", "body": "The hard extruded shadow belongs to the display headline in this world. Cards, buttons, pills and sheet content never get hard offset shadows; they get soft lift or nothing.", "section": "elevation" }
+    ],
+    "dos": [
+      "Do keep primary blue (#1e40af) as the ground and put lime (#eff35f) only on the action, selected states, status, focus, and the cursor.",
+      "Do use ink (#1a1a1a) for any text on lime or white.",
+      "Do set display type in Archivo 900 at 118% width, uppercase, 0.86 line-height, -0.03em tracking, with the Deep Navy (#0f2a47) extrude; lime, white, ice from top line to bottom.",
+      "Do make interactive shapes pills (99px) or discs, and large-radius (1.75rem and up) for cards and sheets.",
+      "Do tilt stuck-on objects at rest (about -11deg and +10deg) and straighten them on hover, focus, and selection.",
+      "Do use the shared expo-out curve (cubic-bezier(0.16, 1, 0.3, 1)) for state transitions.",
+      "Do drive pointer motion through the CSS `translate` property (via --tx, --ty) so it composes with rotate and scale, with one shared GSAP ticker, and switch it all off on touch and under prefers-reduced-motion (also removing spin and transitions).",
+      "Do use a 3px lime focus outline with 3px offset on blue, switching to ink on the sheet.",
+      "Do keep the experimental and non-affiliation statements visible (notice bar, tag, sheet fine print)."
+    ],
+    "donts": [
+      "Don't put hard offset shadows on anything but the display headline.",
+      "Don't use dark gradient dev-tool backgrounds or Apple-style polish; this world is flat saturated color.",
+      "Don't use lime as decoration or on large fills beyond the badge, selected card, and selected tab.",
+      "Don't use sharp-cornered rectangles for controls.",
+      "Don't set running text in the expanded width or in lime.",
+      "Don't replace the native cursor or make the pointer layer required; it is an enhancement only.",
+      "Don't invent stats, testimonials, or imagery; rasters are the repo's own app screenshot and icon (docs/images origin)."
+    ]
+  }
+}
